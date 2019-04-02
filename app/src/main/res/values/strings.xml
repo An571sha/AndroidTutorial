@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Demo App</string>
+    <string name="hello_animesh">Hello Animesh</string>
+    <string name="my_great_app">My Great App</string>
+    <string name="username">Username</string>
+    <string name="textview">TextView</string>
+</resources>
