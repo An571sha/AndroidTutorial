@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class loginPage extends AppCompatActivity {
+public class LoginPage extends AppCompatActivity {
 
     public void loginButton(View view){
         Intent intent = new Intent();
