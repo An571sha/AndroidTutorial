@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConnectThree">
+
+
+    <ImageView
+        android:id="@+id/board"
+        android:layout_width="409dp"
+        android:layout_height="match_parent"
+        android:src="@drawable/board"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@drawable/board" />
+
+    <ImageView
+        android:id="@+id/red9"
+        android:layout_width="108dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="412dp"
+        android:onClick="redClick"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0"
+        android:duration="1000"
+        android:tag="9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/red8"
+        android:layout_width="106dp"
+        android:layout_height="99dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="412dp"
+        android:onClick="redClick"
+        android:tag="8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/red7"
+        android:layout_width="108dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="412dp"
+        android:onClick="redClick"
+        android:tag="7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/red6"
+        android:layout_width="108dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="284dp"
+        android:layout_marginTop="240dp"
+        android:onClick="redClick"
+        android:tag="6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/red5"
+        android:layout_width="108dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="240dp"
+        android:onClick="redClick"
+        android:tag="5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/red4"
+        android:layout_width="108dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="240dp"
+        android:onClick="redClick"
+        android:tag="4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/red1"
+        android:layout_width="92dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="112dp"
+        android:onClick="redClick"
+        android:tag="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/red2"
+        android:layout_width="108dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="116dp"
+        android:onClick="redClick"
+        android:tag="2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/red3"
+        android:layout_width="108dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="280dp"
+        android:layout_marginTop="112dp"
+        android:onClick="redClick"
+        android:tag="3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
