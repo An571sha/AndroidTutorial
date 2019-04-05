@@ -23,6 +23,7 @@ public class CountDownTimerApp extends AppCompatActivity {
     private SeekBar timerSeekBar;
     private Long milliSec;
     private Long millisUntilFinishedVar;
+    CountDownTimer countDownTimer;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,6 @@ public class CountDownTimerApp extends AppCompatActivity {
         timerSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-
             }
 
             @Override
@@ -59,10 +59,11 @@ public class CountDownTimerApp extends AppCompatActivity {
             }
         });
 
+
     }
     public void timer(long millisec, final TextView tv) {
 
-        new CountDownTimer(millisec, 1000) {
+      countDownTimer = new CountDownTimer(millisec, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 int seconds = (int) (millisUntilFinished / 1000);
