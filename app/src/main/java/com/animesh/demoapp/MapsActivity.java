@@ -8,6 +8,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -30,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMapLongClickListener {
 
@@ -45,7 +47,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     TextView longitudeTextview;
     TextView altitudeTextview;
     TextView addressTextView;
+    TextView weatherTextView;
     Marker marker;
+    String myUrl;
+    String weatherDescription;
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -69,6 +74,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         longitudeTextview = (TextView) findViewById(R.id.longitude);
         altitudeTextview = (TextView) findViewById(R.id.altitude);
         addressTextView = (TextView) findViewById(R.id.address);
+        weatherTextView = (TextView) findViewById(R.id.weather);
 
 
 
@@ -100,6 +106,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 if(addressArrayList.size() > 0){
                    Log.i("Adress",addressArrayList.get(0).toString());
                    updateTextView(latitude,longitude);
+                   setWeatherForcast(latitude,longitude);
                 }
 
             }
@@ -137,14 +144,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void updateTextView(double latitude, double longitude){
         if(latitude != 0 ){
-            Log.i("Location",String.valueOf(latitude) );
+          //  Log.i("Location",String.valueOf(latitude) );
             latitudeTextview.setText(String.valueOf("Latitude:"+ latitude));
         }else{
             latitudeTextview.setText(String.valueOf("No data"));
         }
 
         if(longitude !=0) {
-            Log.i("Location",String.valueOf(longitude) );
+          //  Log.i("Location",String.valueOf(longitude) );
             longitudeTextview.setText(String.valueOf("longitude:"+longitude));
         }else{
             longitudeTextview.setText(String.valueOf("No data"));
@@ -162,7 +169,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if(addressArrayList.get(0).getAddressLine(0) != null){
             addressTextView.setText(new StringBuilder().append(addressArrayList.get(0)
                     .getAddressLine(0))
-                    .append(addressArrayList.get(0).getThoroughfare())
                     .append("\n").toString());
         }
 
@@ -196,6 +202,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.i("Adress",addressArrayList.get(0).toString());
             updateTextView(latLng.latitude,latLng.longitude);
         }
+
+        setWeatherForcast(latLng.latitude,latLng.longitude);
+
+    }
+
+    public void setWeatherForcast(double latitude, double longitude){
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("https")
+                .authority("api.openweathermap.org")
+                .appendPath("data")
+                .appendPath("2.5")
+                .appendPath("weather")
+                .appendQueryParameter("appid", "27e682964d2d1a0405b1fc6ab4d195d8")
+                .appendQueryParameter("lat",String.valueOf(latitude))
+                .appendQueryParameter("lon",String.valueOf(longitude))
+                .appendQueryParameter("units", "metric");
+        myUrl = builder.build().toString();
+        WeatherApp.GetHtml getWeather = new WeatherApp.GetHtml();
+        try {
+            weatherDescription = getWeather.execute(myUrl).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        Log.i("Description",weatherDescription);
+        weatherTextView.setText(weatherDescription);
+
 
     }
 }

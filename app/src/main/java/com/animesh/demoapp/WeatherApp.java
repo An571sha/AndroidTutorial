@@ -32,8 +32,8 @@ public class WeatherApp extends AppCompatActivity {
     private Spinner sItems;
     private ArrayAdapter<String> adapter;
     private String myUrl;
-    TextView descriptionTextView;
-    TextView TempTextView;
+    static TextView descriptionTextView;
+    static TextView TempTextView;
 
     public void initHtml() {
         Uri.Builder builder = new Uri.Builder();
@@ -91,7 +91,7 @@ public class WeatherApp extends AppCompatActivity {
     }
 
 
-    public class GetHtml extends AsyncTask<String, Void, String> {
+    public static class GetHtml extends AsyncTask<String, Void, String> {
 
         URL url;
         String result = "";
@@ -111,26 +111,26 @@ public class WeatherApp extends AppCompatActivity {
                 InputStream out = (InputStream) urlConnection.getContent();
                 InputStreamReader reader = new InputStreamReader(in);
                 int data = reader.read();
-                Log.i("API REQUEST START-data-", String.valueOf(data));
+                //  Log.i("API REQUEST START-data-", String.valueOf(data));
 
 
                 try {
                     JsonParser jp = new JsonParser();
                     JsonElement root = jp.parse(new InputStreamReader((InputStream) url.getContent()));
-                    Log.i("ROOT", String.valueOf(root));
+                    //  Log.i("ROOT", String.valueOf(root));
                     if (root instanceof JsonObject) {
                         jsonobj = root.getAsJsonObject();
-                        Log.i("JsonObj", String.valueOf(jsonobj));
+                        //    Log.i("JsonObj", String.valueOf(jsonobj));
                         description = jsonobj.get("weather").getAsJsonArray().get(0).getAsJsonObject().get("description").toString();
-                        Log.i("desc", String.valueOf(description));
+                        //   Log.i("desc", String.valueOf(description));
                         temp = jsonobj.get("main").getAsJsonObject().get("temp").toString();
                     }
-
 
                 } catch (IOException ix) {
                     ix.printStackTrace();
                 }
 
+                return description;
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -140,19 +140,22 @@ public class WeatherApp extends AppCompatActivity {
                 ilg.printStackTrace();
             }
 
-            return "completed";
+            return description;
         }
 
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             if (description != null && temp != null) {
-                descriptionTextView.setText(description);
+                /*descriptionTextView.setText(description);
                 TempTextView.setText(temp + " "+"C");
+                */
 
             }
         }
 
+        }
+
     }
-}
+
 
